@@ -12,7 +12,7 @@ import styles from './styles.css';
 export class PanelContainer extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={ styles.panelContainer }>
+      <div className={styles.panelContainer}>
       This is PanelContainer container !
       </div>
     );
