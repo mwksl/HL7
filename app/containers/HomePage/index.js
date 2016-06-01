@@ -11,12 +11,18 @@
 
 import React from 'react';
 
+import HealthStatusPanel from 'components/HealthStatusPanel';
+
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.Component {
 
   render() {
     return (
-      <h1>This is the Homepage!</h1>
+      <div>
+        <h1>This is the Homepage!</h1>
+        <h3>Here is the HealthStatusPanel component</h3>
+        <HealthStatusPanel />
+      </div>
     );
   }
 }

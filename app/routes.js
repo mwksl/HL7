@@ -14,7 +14,7 @@ const loadModule = (cb) => (componentModule) => {
 
 export default function createRoutes() {
   // Create reusable async injectors using getHooks factory
-  // const { injectReducer, injectSagas } = getHooks(store);
+  const { injectReducer, injectSagas } = getHooks(store);
 
   return [
     {
@@ -33,8 +33,29 @@ export default function createRoutes() {
 
         importModules.catch(errorLoading);
       },
+    },    {
+      path: '/dashboard',
+      name: 'panelContainer',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/PanelContainer/reducer'),
+          System.import('containers/PanelContainer/sagas'),
+          System.import('containers/PanelContainer'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('panelContainer', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
     }, {
       path: '*',
+
       name: 'notfound',
       getComponent(nextState, cb) {
         System.import('containers/NotFoundPage')

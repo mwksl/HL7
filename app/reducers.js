@@ -38,9 +38,11 @@ function routeReducer(state = routeInitialState, action) {
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
+import panelContainerReducer from 'containers/PanelContainer/reducer';
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
+    panelContainer: panelContainerReducer,
     ...asyncReducers,
   });
 }
